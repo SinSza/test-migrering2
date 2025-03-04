@@ -23,8 +23,14 @@ jobs:
       IMAGE_NAME: brennuvargur/pipeline-test
       IMAGE_TAG: python-app-1.0
     steps:
-      - name: Install Git
-        run: apt-get update && apt-get install -y git
+      - name: Install Git and Git LFS
+        run: |
+          apt-get update
+          apt-get install -y git
+          apt-get install -y curl
+          curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash
+          apt-get install -y git-lfs
+          git lfs install
 
       - name: Checkout
         uses: actions/checkout@v4.1.0
