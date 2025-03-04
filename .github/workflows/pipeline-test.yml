@@ -17,13 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: python:3.9-slim-buster
+      options: --user root  # Run as root user
     timeout-minutes: 60
     env:
       IMAGE_NAME: brennuvargur/pipeline-test
       IMAGE_TAG: python-app-1.0
     steps:
       - name: Install Git
-        run: sudo apt-get update && sudo apt-get install -y git
+        run: apt-get update && apt-get install -y git
 
       - name: Checkout
         uses: actions/checkout@v4.1.0
@@ -42,6 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker:28.0.1-cli
+      options: --user root  # Run as root user
     timeout-minutes: 60
     services:
       docker:
